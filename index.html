@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Postcard</title>
+
+    <meta charset="utf-8" />
+    <meta name="description" content="Postcard" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <!-- normalize.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+
+    <!-- html2canvas -->
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <!-- SmtpJS -->
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+
+    <!-- Promise polyfill -->
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap&subset=cyrillic" rel="stylesheet" />
+
+    <link rel="stylesheet" href="./css/main.css" />
+    <script src="./js/main.js"></script>
+    <script src="./js/postcardImageUtils.js"></script>
+</head>
+
+<body>
+    <div class="sidebar"></div>
+    <div class="main">
+        <button class="main__sidebar-button sidebar-button"></button>
+        <div class="main__wrapper wrapper">
+            <div id="area-to-capture" class="wrapper__area-to-capture area-to-capture"></div>
+        </div>
+        <form class="main__form form">
+            <label class="form__label" for="to-input-field">
+                To:
+                <input type="text" class="form__input-field" id="to-input-field" placeholder="example@gmail.com" />
+            </label>
+            <label class="form__label" for="subject-input-field">
+                Subject:
+                <input type="text" class="form__input-field" id="subject-input-field" placeholder="Huh! Here's your postcard ;)" />
+            </label>
+            <label class="form__label" for="body-input-field">
+                Body:
+                <input type="text" class="form__input-field" id="body-input-field" placeholder="Just want to say that I love you!" />
+            </label>
+            <div class="form__button-group button-group">
+                <button class="button-group__button" type="button" onclick="downloadPostcardImage()">Download</button>
+                <button class="button-group__button" type="button" onclick="sendPostcardImage()">Send</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
