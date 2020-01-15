@@ -26,7 +26,7 @@ $(document).ready(function () {
         var body = $("#body-input-field").val();
 
         if (!to || !subject || !body) {
-          alert("All input fields must be filled!");
+          alert("Все поля ввода должны быть заполнены!");
           return;
         }
 
