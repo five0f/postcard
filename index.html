@@ -2,11 +2,10 @@
 <html lang="en">
 
 <head>
-    <title>Postcard</title>
+    <title>Создай и отправь открытку на 23 февраля! :)</title>
 
     <meta charset="utf-8" />
-    <meta name="description" content="Postcard" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Создай и отправь открытку на 23 февраля! :)" />
     <meta name="theme-color" content="#ffffff" />
 
     <!-- normalize.css -->
@@ -35,28 +34,29 @@
 </head>
 
 <body>
-    <div class="sidebar"></div>
+    <div class="sidebar sidebar_opened"></div>
+    <button class="sidebar-button sidebar-button_opened"></button>
     <div class="main">
-        <button class="main__sidebar-button sidebar-button"></button>
+        <h1 class="app-name">Создай и отправь открытку<br />на 23 февраля! :)</h1>
         <div class="main__wrapper wrapper">
             <div id="area-to-capture" class="wrapper__area-to-capture area-to-capture"></div>
         </div>
         <form class="main__form form">
             <label class="form__label" for="to-input-field">
-                To:
+                Кому:
                 <input type="text" class="form__input-field" id="to-input-field" placeholder="example@gmail.com" />
             </label>
             <label class="form__label" for="subject-input-field">
-                Subject:
-                <input type="text" class="form__input-field" id="subject-input-field" placeholder="Huh! Here's your postcard ;)" />
+                Тема письма:
+                <input type="text" class="form__input-field" id="subject-input-field" placeholder="С 23 февраля, мой защитник! ;)" />
             </label>
             <label class="form__label" for="body-input-field">
-                Body:
-                <input type="text" class="form__input-field" id="body-input-field" placeholder="Just want to say that I love you!" />
+                Тело письма:
+                <input type="text" class="form__input-field" id="body-input-field" placeholder="Просто хочу сказать, что люблю тебя!" />
             </label>
             <div class="form__button-group button-group">
-                <button class="button-group__button" type="button" onclick="downloadPostcardImage()">Download</button>
-                <button class="button-group__button" type="button" onclick="sendPostcardImage()">Send</button>
+                <button class="button-group__button" type="button" onclick="downloadPostcardImage()">Скачать</button>
+                <button class="button-group__button" type="button" onclick="sendPostcardImage()">Отправить</button>
             </div>
         </form>
     </div>
