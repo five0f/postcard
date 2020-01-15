@@ -18,10 +18,6 @@ function sendPostcardImage() {
   var subject = document.getElementById("subject-input-field").value;
   var body = document.getElementById("body-input-field").value;
 
-  if (!to || !subject || !body) {
-    alert("All input fields must be filled!");
-  }
-
   getPostcardCanvas().then(function(canvas) {
     var image = canvas.toDataURL("image/jpeg", 1).split(",")[1];
 
@@ -45,7 +41,7 @@ function sendPostcardImage() {
             Body: body,
             Attachments: [
               {
-                name: "postcard.jpg",
+                name: "postcard.jpeg",
                 path: response.data.link
               }
             ]

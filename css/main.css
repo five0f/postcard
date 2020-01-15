@@ -37,6 +37,11 @@ body {
   display: flex;
 }
 
+.sidebar__element-name {
+  font-size: 18px;
+  margin-left: 5px;
+}
+
 .sidebar-button {
   border: 0;
   height: 100%;
@@ -73,8 +78,8 @@ body {
   box-shadow: 0 0 5px lightgray;
   display: block;
   margin: 30px 50px 0;
-  width: 744px;
-  height: 564px;
+  width: 884px;
+  height: 714px;
 }
 
 .area-to-capture {
@@ -82,23 +87,22 @@ body {
   height: 100%;
 }
 
-.form {
+.send-postcard-form {
   display: flex;
   width: 250px;
+  margin-top: 15px;
   flex-direction: column;
   align-items: center;
-  margin-top: 30px;
-  margin-bottom: 20px;
 }
 
-.form__label {
+.send-postcard-form__label {
   display: block;
   margin-bottom: 12px;
   width: 100%;
   font-size: 12px;
 }
 
-.form__input-field {
+.send-postcard-form__input-field {
   margin: 5px 0 0 0;
   display: block;
   width: 100%;
@@ -106,23 +110,19 @@ body {
   padding: 5px;
 }
 
+textarea.send-postcard-form__input-field {
+  resize: none;
+  height: 100px;
+}
+
 .button-group {
-  width: 100%;
+  margin-top: 30px;
+  width: 320px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .button-group__button {
-  font-size: 12px;
-  width: 100%;
-  max-width: 100px;
-  height: 22px;
-}
-
-.button-group__button:first-child {
-  margin-left: 10px;
-}
-
-.button-group__button:last-child {
-  margin-right: 10px;
+  width: 150px;
+  height: 35px;
 }

@@ -17,9 +17,14 @@
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" />
 
     <!-- SmtpJS -->
     <script src="https://smtpjs.com/v3/smtp.js"></script>
+
+    <!-- Spectrum -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.css">
 
     <!-- Promise polyfill -->
     <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
@@ -34,31 +39,34 @@
 </head>
 
 <body>
-    <div class="sidebar sidebar_opened"></div>
+    <div class="sidebar sidebar_opened">
+        <h1 class="sidebar__element-name">Цвет фона</h1>
+        <input type="text" class="color-picker" />
+    </div>
     <button class="sidebar-button sidebar-button_opened"></button>
+    <form class="send-postcard-form">
+        <label class="send-postcard-form__label" for="to-input-field">
+            Кому:
+            <input type="text" class="send-postcard-form__input-field" id="to-input-field" placeholder="example@gmail.com" />
+        </label>
+        <label class="send-postcard-form__label" for="subject-input-field">
+            Тема письма:
+            <input type="text" class="send-postcard-form__input-field" id="subject-input-field" placeholder="С 23 февраля, мой защитник! ;)" />
+        </label>
+        <label class="send-postcard-form__label" for="body-input-field">
+            Тело письма:
+            <textarea class="send-postcard-form__input-field" id="body-input-field" placeholder="Просто хочу сказать, что люблю тебя!"></textarea>
+        </label>
+    </form>
     <div class="main">
         <h1 class="app-name">Создай и отправь открытку<br />на 23 февраля! :)</h1>
         <div class="main__wrapper wrapper">
             <div id="area-to-capture" class="wrapper__area-to-capture area-to-capture"></div>
         </div>
-        <form class="main__form form">
-            <label class="form__label" for="to-input-field">
-                Кому:
-                <input type="text" class="form__input-field" id="to-input-field" placeholder="example@gmail.com" />
-            </label>
-            <label class="form__label" for="subject-input-field">
-                Тема письма:
-                <input type="text" class="form__input-field" id="subject-input-field" placeholder="С 23 февраля, мой защитник! ;)" />
-            </label>
-            <label class="form__label" for="body-input-field">
-                Тело письма:
-                <input type="text" class="form__input-field" id="body-input-field" placeholder="Просто хочу сказать, что люблю тебя!" />
-            </label>
-            <div class="form__button-group button-group">
-                <button class="button-group__button" type="button" onclick="downloadPostcardImage()">Скачать</button>
-                <button class="button-group__button" type="button" onclick="sendPostcardImage()">Отправить</button>
-            </div>
-        </form>
+        <div class="main__button-group button-group">
+            <button class="button-group__button ui-corner-all ui-button" type="button" onclick="downloadPostcardImage()">Скачать</button>
+            <button class="button-group__button ui-corner-all ui-button" type="button" onclick="openSendPostcardForm()">Отправить</button>
+        </div>
     </div>
 </body>
 
