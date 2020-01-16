@@ -15,7 +15,6 @@ const {
 const paths = {
   src: {
     root: "./src/**/*",
-    icon: "./favicon.ico",
     html: "./src/*",
     css: "./src/css/*",
     js: "./src/js/*",
@@ -24,7 +23,6 @@ const paths = {
   build: {
     allFiles: "./build/**",
     root: "./build/",
-    html: "./build/",
     js: "./build/js/",
     css: "./build/css/",
     images: "./build/images/"
@@ -39,9 +37,9 @@ function rmBuild() {
     .pipe(clean());
 };
 
-function processHtml() {
-  return src(paths.src.html)
-    .pipe(dest(paths.build.html));
+function processRoot() {
+  return src(paths.src.root)
+    .pipe(dest(paths.build.root));
 };
 
 function processCss() {
@@ -63,15 +61,9 @@ function processImages() {
     .pipe(dest(paths.build.images));
 };
 
-function processIcon() {
-  return src(paths.src.icon)
-    .pipe(dest(paths.build.root));
-}
-
 task("build", series(
   rmBuild,
-  processHtml,
-  processIcon,
+  processRoot,
   processCss,
   processJs,
   processImages
