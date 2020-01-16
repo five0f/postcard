@@ -18,7 +18,7 @@ const paths = {
     rootOnly: "./src/*",
     css: "./src/css/main.css",
     js: "./src/js/*.js",
-    images: "./src/images/*.{jpg,jpeg,png,svg}",
+    images: "./src/images/**/*.{jpg,jpeg,png,svg}",
   },
   build: {
     allFiles: "./build/**/*",
@@ -68,17 +68,25 @@ task("build", series(
 ));
 
 function watchSrc() {
-  watch(paths.src.root, series("build"));
+  watch(paths.src.root, processRoot);
+  watch(paths.src.css, processCss);
+  watch(paths.src.js, processJs);
+  watch(paths.src.images, processImages);
 };
 
-function runHotReload() {
+function hotReload(done) {
+  browserSync.reload();
+  done();
+}
+
+function runHotReloading() {
   browserSync.init({
     server: {
       baseDir: paths.build.root
     }
   });
 
-  watch(paths.build.allFiles, browserSync.reload);
+  watch(paths.build.allFiles, hotReload);
 };
 
-task("default", series("build", parallel(watchSrc, runHotReload)));
+task("default", series("build", parallel(watchSrc, runHotReloading)));
