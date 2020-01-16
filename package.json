@@ -2,12 +2,10 @@
 	"name": "postcard",
 	"description": "postcard",
 	"version": "1.0.0",
-	"author": "five0f",
+	"private": true,
+	"license": "UNLICENSED",
+	"author": "Anastasia Sergienko <sergienkoanastasiia@gmail.com> (https://github.com/five0f)",
 	"homepage": "https://github.com/five0f/postcard",
-	"keywords": [
-		"postcard"
-	],
-	"license": "ISC",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/five0f/postcard.git"
@@ -17,7 +15,6 @@
 		"build": "gulp build",
 		"deploy": "gh-pages -d ./build"
 	},
-	"dependencies": {},
 	"devDependencies": {
 		"browser-sync": "2.26.7",
 		"gh-pages": "2.2.0",
