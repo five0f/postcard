@@ -53,11 +53,64 @@ function initializeSendPostcardForm() {
   });
 }
 
-function initializeDroppable() {
+function initializeDroppableAndDraggables() {
+  var itemCounter = 0;
+
+  $(".cloneable-item").draggable({
+    helper: "clone",
+    scroll: false,
+    cursor: "move",
+    stack: ".cloneable-item, .cloned-item",
+    revert: "invalid",
+    start: function (_event, ui) {
+      ui.helper.css({
+        "width": "",
+        "margin": ""
+      });
+    },
+    stop: function (_event, ui) {
+      var clonedItemId = "#cloned-item_" + itemCounter;
+
+      if ($(clonedItemId).hasClass("cloneable-item")) {
+        var position = ui.offset;
+
+        $(clonedItemId).css({
+          "left": position.left,
+          "top": position.top,
+          "position": "absolute",
+          "width": ui.helper.css("width"),
+          "margin": ui.helper.css("margin")
+        });
+
+        $(clonedItemId).removeClass("cloneable-item");
+        $(clonedItemId).addClass("cloned-item");
+
+        $(clonedItemId).draggable({
+          stack: ".cloned-item",
+          cursor: "move",
+          scroll: false,
+          revert: "invalid"
+        });
+
+        $(clonedItemId).dblclick(function () {
+          $(this).remove();
+        });
+      }
+    }
+  });
+
   $("#postcard").droppable({
-    accept: "#postcard-item",
-    drop: function(event, ui) {
-      // make dropped element a child of droppable... here?
+    tolerance: "fit",
+    drop: function (_event, ui) {
+      var droppedItem = ui.draggable;
+      if (droppedItem.attr("id").search(/cloneable-item_[0-9]{1,}/) != -1) {
+        itemCounter++;
+        var clonedItem = droppedItem.clone();
+        clonedItem.addClass("temporary-class");
+        $(this).append(clonedItem);
+        $(".temporary-class").attr("id", "cloned-item_" + itemCounter);
+        $("#cloned-item_" + itemCounter).removeClass("temporary-class");
+      }
     }
   });
 }
@@ -66,7 +119,7 @@ $(document).ready(function () {
   initializeSidebarButton();
   initializeColorPicker();
   initializeSendPostcardForm();
-  initializeDroppable();
+  initializeDroppableAndDraggables();
 });
 
 function openSendPostcardForm() {
