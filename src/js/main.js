@@ -56,8 +56,8 @@ function initializeSendPostcardForm() {
 function initializeDroppable() {
   $("#postcard").droppable({
     accept: "#postcard-item",
-    drop: function(event, ui) {
-      // make dropped element a child of droppable... here?
+    drop: function(_event, ui) {
+      $("#postcard").append(ui.draggable);
     }
   });
 }
