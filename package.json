@@ -5,26 +5,25 @@
 	"author": "five0f",
 	"homepage": "https://github.com/five0f/postcard",
 	"keywords": [
-	  "postcard"
+		"postcard"
 	],
 	"license": "ISC",
 	"repository": {
-	  "type": "git",
-	  "url": "https://github.com/five0f/postcard.git"
+		"type": "git",
+		"url": "https://github.com/five0f/postcard.git"
 	},
 	"scripts": {
-	  "start": "gulp",
-	  "build": "gulp build",
-	  "deploy": "gh-pages -d ./build"
+		"start": "gulp",
+		"build": "gulp build",
+		"deploy": "gh-pages -d ./build"
 	},
 	"dependencies": {},
 	"devDependencies": {
-	  "browser-sync": "2.26.7",
-	  "gh-pages": "2.2.0",
-	  "gulp": "4.0.2",
-	  "gulp-autoprefixer": "7.0.1",
-	  "gulp-clean": "0.4.0",
-	  "gulp-concat": "2.6.1",
-	  "gulp-rename": "2.0.0"
+		"browser-sync": "2.26.7",
+		"gh-pages": "2.2.0",
+		"gulp": "4.0.2",
+		"gulp-autoprefixer": "7.0.1",
+		"gulp-clean": "0.4.0",
+		"gulp-imagemin": "7.0.0"
 	}
 }

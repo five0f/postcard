@@ -1,7 +1,7 @@
-const concat = require("gulp-concat");
 const browserSync = require("browser-sync").create();
 const autoprefixer = require("gulp-autoprefixer");
 const clean = require("gulp-clean");
+const imagemin = require('gulp-imagemin');
 
 const {
   watch,
@@ -15,16 +15,16 @@ const {
 const paths = {
   src: {
     root: "./src/**/*",
-    html: "./src/*",
-    css: "./src/css/*",
-    js: "./src/js/*",
-    images: "./src/images/*",
+    rootOnly: "./src/*",
+    css: "./src/css/main.css",
+    js: "./src/js/*.js",
+    images: "./src/images/*.{jpg,jpeg,png,svg}",
   },
   build: {
-    allFiles: "./build/**",
+    allFiles: "./build/**/*",
     root: "./build/",
-    js: "./build/js/",
     css: "./build/css/",
+    js: "./build/js/",
     images: "./build/images/"
   }
 };
@@ -38,16 +38,13 @@ function rmBuild() {
 };
 
 function processRoot() {
-  return src(paths.src.root)
+  return src(paths.src.rootOnly)
     .pipe(dest(paths.build.root));
 };
 
 function processCss() {
   return src(paths.src.css)
-    .pipe(concat("main.css"))
-    .pipe(autoprefixer({
-      cascade: false
-    }))
+    .pipe(autoprefixer())
     .pipe(dest(paths.build.css));
 };
 
@@ -58,6 +55,7 @@ function processJs() {
 
 function processImages() {
   return src(paths.src.images)
+    .pipe(imagemin())
     .pipe(dest(paths.build.images));
 };
 
