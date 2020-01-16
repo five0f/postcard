@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Создай и отправь открытку на 23 февраля! :)</title>
+
+    <meta charset="utf-8" />
+    <meta name="description" content="Создай и отправь открытку на 23 февраля! :)" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <!-- normalize.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+
+    <!-- html2canvas -->
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" />
+
+    <!-- SmtpJS -->
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+
+    <!-- Spectrum -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.css">
+
+    <!-- Promise polyfill -->
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap&subset=cyrillic" rel="stylesheet" />
+
+    <link rel="stylesheet" href="./css/main.css" />
+    <script src="./js/main.js"></script>
+    <script src="./js/postcardImageUtils.js"></script>
+</head>
+
+<body>
+    <div class="sidebar sidebar_opened">
+        <h1 class="sidebar__element-name">Цвет фона</h1>
+        <input type="text" class="color-picker" />
+    </div>
+    <button class="sidebar-button sidebar-button_opened"></button>
+    <form class="send-postcard-form">
+        <label class="send-postcard-form__label" for="to-input-field">
+            Кому:
+            <input type="text" class="send-postcard-form__input-field" id="to-input-field" placeholder="example@gmail.com" />
+        </label>
+        <label class="send-postcard-form__label" for="subject-input-field">
+            Тема письма:
+            <input type="text" class="send-postcard-form__input-field" id="subject-input-field" placeholder="С 23 февраля, мой защитник! ;)" />
+        </label>
+        <label class="send-postcard-form__label" for="body-input-field">
+            Тело письма:
+            <textarea class="send-postcard-form__input-field" id="body-input-field" placeholder="Просто хочу сказать, что люблю тебя!"></textarea>
+        </label>
+    </form>
+    <div class="main">
+        <h1 class="app-name">Создай и отправь открытку<br />на 23 февраля! :)</h1>
+        <div class="main__wrapper wrapper">
+            <div id="area-to-capture" class="wrapper__area-to-capture area-to-capture"></div>
+        </div>
+        <div class="main__button-group button-group">
+            <button class="button-group__button ui-corner-all ui-button" type="button" onclick="downloadPostcardImage()">Скачать</button>
+            <button class="button-group__button ui-corner-all ui-button" type="button" onclick="openSendPostcardForm()">Отправить</button>
+        </div>
+    </div>
+</body>
+
+</html>
