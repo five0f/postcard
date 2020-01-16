@@ -45,6 +45,12 @@ body {
   -webkit-box-direction: normal;
           flex-direction: column;
   padding: 10px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.sidebar::-webkit-scrollbar {
+  display: none;
 }
 
 .sidebar_opened {
@@ -169,6 +175,5 @@ textarea.send-postcard-form__input-field {
   width: 50px;
   height: 35px;
   margin-right: 150px;
-  /* border: 1px solid #b3404a; */
   background: url("../images/trash.svg") center no-repeat, rgb(231, 229, 229);
 }
