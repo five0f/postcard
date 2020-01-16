@@ -53,9 +53,9 @@ function initializeSendPostcardForm() {
   });
 }
 
-function initializeDroppableAndDraggables() {
-  var itemCounter = 0;
+var clonedItemCounter = 0;
 
+function initializePostcardItems() {
   $(".cloneable-item").draggable({
     helper: "clone",
     scroll: false,
@@ -69,7 +69,7 @@ function initializeDroppableAndDraggables() {
       });
     },
     stop: function (_event, ui) {
-      var clonedItemId = "#cloned-item_" + itemCounter;
+      var clonedItemId = "#cloned-item_" + clonedItemCounter;
 
       if ($(clonedItemId).hasClass("cloneable-item")) {
         var position = ui.offset;
@@ -93,24 +93,56 @@ function initializeDroppableAndDraggables() {
         });
 
         $(clonedItemId).dblclick(function () {
-          $(this).remove();
+          if ($(this).hasClass("ui-draggable")) {
+            $(this).draggable("destroy");
+
+            $(this).resizable({
+              aspectRatio: true,
+              autoHide: true,
+              containment: "parent",
+              handles: "all"
+            });
+          } else if ($(this).hasClass("ui-resizable")) {
+            $(this).resizable("destroy");
+
+            $(this).draggable({
+              stack: ".cloned-item",
+              cursor: "move",
+              scroll: false,
+              revert: "invalid"
+            });
+          } else {
+            // ignore...
+          }
         });
       }
     }
   });
+}
 
+function initializePostcard() {
   $("#postcard").droppable({
     tolerance: "fit",
     drop: function (_event, ui) {
       var droppedItem = ui.draggable;
       if (droppedItem.attr("id").search(/cloneable-item_[0-9]{1,}/) != -1) {
-        itemCounter++;
+        clonedItemCounter++;
         var clonedItem = droppedItem.clone();
         clonedItem.addClass("temporary-class");
         $(this).append(clonedItem);
-        $(".temporary-class").attr("id", "cloned-item_" + itemCounter);
-        $("#cloned-item_" + itemCounter).removeClass("temporary-class");
+        $(".temporary-class").attr("id", "cloned-item_" + clonedItemCounter);
+        $("#cloned-item_" + clonedItemCounter).removeClass("temporary-class");
       }
+    }
+  });
+}
+
+function initalizeTrash() {
+  $("#trash").droppable({
+    tolerance: "touch",
+    accept: ".cloned-item",
+    drop: function (_event, ui) {
+      ui.draggable.remove();
     }
   });
 }
@@ -119,7 +151,9 @@ $(document).ready(function () {
   initializeSidebarButton();
   initializeColorPicker();
   initializeSendPostcardForm();
-  initializeDroppableAndDraggables();
+  initializePostcard();
+  initalizeTrash();
+  initializePostcardItems();
 });
 
 function openSendPostcardForm() {

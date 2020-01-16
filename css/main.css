@@ -142,8 +142,13 @@ textarea.send-postcard-form__input-field {
   height: 100px;
 }
 
-.button-group {
+.main__footer {
   margin-top: 30px;
+  display: -webkit-box;
+  display: flex;
+}
+
+.button-group {
   width: 320px;
   display: -webkit-box;
   display: flex;
@@ -154,4 +159,12 @@ textarea.send-postcard-form__input-field {
 .button-group__button {
   width: 150px;
   height: 35px;
+}
+
+.footer__trash {
+  width: 50px;
+  height: 35px;
+  margin-right: 150px;
+  /* border: 1px solid #b3404a; */
+  background: url("../images/trash.svg") center no-repeat, rgb(231, 229, 229);
 }
