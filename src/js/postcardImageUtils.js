@@ -1,7 +1,7 @@
 "use strict";
 
 function getPostcardCanvas() {
-  return html2canvas(document.querySelector("#area-to-capture"));
+  return html2canvas(document.querySelector("#postcard"));
 }
 
 function downloadPostcardImage() {

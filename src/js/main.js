@@ -1,18 +1,22 @@
 "use strict";
 
-$(document).ready(function () {
+function initializeSidebarButton() {
   $(".sidebar-button").on("click", function () {
     $(".sidebar").toggleClass("sidebar_opened");
     $(".sidebar-button").toggleClass("sidebar-button_opened");
   });
+}
 
+function initializeColorPicker() {
   $(".color-picker").spectrum({
     color: "#fff",
     change: function (color) {
-      $(".area-to-capture").css("background-color", color.toHexString());
+      $("#postcard").css("background-color", color.toHexString());
     }
   });
+}
 
+function initializeSendPostcardForm() {
   $(".send-postcard-form").dialog({
     autoOpen: false,
     modal: true,
@@ -47,6 +51,22 @@ $(document).ready(function () {
       of: document
     }
   });
+}
+
+function initializeDroppable() {
+  $("#postcard").droppable({
+    accept: "#postcard-item",
+    drop: function(event, ui) {
+      // make dropped element a child of droppable... here?
+    }
+  });
+}
+
+$(document).ready(function () {
+  initializeSidebarButton();
+  initializeColorPicker();
+  initializeSendPostcardForm();
+  initializeDroppable();
 });
 
 function openSendPostcardForm() {
