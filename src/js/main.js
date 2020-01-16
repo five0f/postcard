@@ -7,7 +7,6 @@ $(document).ready(function () {
   });
 
   $(".color-picker").spectrum({
-    showAlpha: true,
     color: "#fff",
     change: function (color) {
       $(".area-to-capture").css("background-color", color.toHexString());
