@@ -73,7 +73,7 @@ body {
   border: 0;
   height: 100%;
   width: 30px;
-  background: url("../images/right-arrow.svg") center no-repeat;
+  background: url("../images/ui/right-arrow.svg") center no-repeat;
   background-color: #50d090;
   -webkit-box-flex: 1;
           flex-grow: 1;
@@ -81,7 +81,7 @@ body {
 }
 
 .sidebar-button_opened {
-  background-image: url("../images/left-arrow.svg");
+  background-image: url("../images/ui/left-arrow.svg");
 }
 
 .main {
@@ -144,9 +144,7 @@ body {
   font-size: 12px;
 }
 
-.send-postcard-form__input-field,
-.input-text-form__input-field,
-.input-text-form__multiline-input-field {
+.send-postcard-form__input-field {
   margin: 5px 0 0 0;
   display: block;
   width: 100%;
@@ -154,9 +152,7 @@ body {
   padding: 5px;
 }
 
-textarea.send-postcard-form__input-field,
-textarea.input-text-form__input-field,
-textarea.input-text-form__multiline-input-field {
+textarea.send-postcard-form__input-field {
   resize: none;
   height: 100px;
 }
@@ -184,7 +180,7 @@ textarea.input-text-form__multiline-input-field {
   width: 50px;
   height: 35px;
   margin-right: 150px;
-  background: url("../images/trash.svg") center no-repeat;
+  background: url("../images/ui/trash.svg") center no-repeat;
   background-color: rgb(231, 229, 229);
 }
 
