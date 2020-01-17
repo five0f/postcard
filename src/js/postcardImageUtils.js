@@ -5,14 +5,14 @@ function getPostcardCanvas() {
     ignoreElements: function (element) {
       return (
         element.className.search(/ui-resizable-handle/) != -1 ||
-        element.id.search(/cloned-item_[0-9]{1,}_n[we]-control/) != -1
+        element.id.search(/cloned-item_[0-9]{1,}_control/) != -1
       );
     }
   });
 }
 
 function downloadPostcardImage() {
-  getPostcardCanvas().then(function(canvas) {
+  getPostcardCanvas().then(function (canvas) {
     var a = document.createElement("a");
     a.href = canvas.toDataURL("image/jpeg", 1);
     a.download = "postcard";
@@ -25,7 +25,7 @@ function sendPostcardImage() {
   var subject = document.getElementById("subject-input-field").value;
   var body = document.getElementById("body-input-field").value;
 
-  getPostcardCanvas().then(function(canvas) {
+  getPostcardCanvas().then(function (canvas) {
     var image = canvas.toDataURL("image/jpeg", 1).split(",")[1];
 
     $.ajax({
