@@ -155,13 +155,13 @@ function initializePostcardItems() {
             revert: function (isValid) {
               if (!isValid) {
                 $(clonedItemId + "_nw-control").css({
-                  "left": (parseInt(stopPosition.left)) + "px",
-                  "top": (parseInt(stopPosition.top)) + "px",
+                  "left": parseInt(stopPosition.left) + "px",
+                  "top": parseInt(stopPosition.top) + "px",
                 });
 
                 $(clonedItemId + "_ne-control").css({
                   "left": (parseInt(stopPosition.left) + parseInt($(clonedItemId).css("width")) - 50) + "px",
-                  "top": (parseInt(stopPosition.top)) + "px",
+                  "top": parseInt(stopPosition.top) + "px",
                 });
               }
 
@@ -172,21 +172,21 @@ function initializePostcardItems() {
               var dragPosition = ui.offset;
 
               $(clonedItemId + "_nw-control").css({
-                "left": (parseInt(dragPosition.left)) + "px",
-                "top": (parseInt(dragPosition.top)) + "px",
+                "left": parseInt(dragPosition.left) + "px",
+                "top": parseInt(dragPosition.top) + "px",
               });
 
               $(clonedItemId + "_ne-control").css({
                 "left": (parseInt(dragPosition.left) + parseInt($(clonedItemId).css("width")) - 50) + "px",
-                "top": (parseInt(dragPosition.top)) + "px",
+                "top": parseInt(dragPosition.top) + "px",
               });
             }
           });
 
         $("<div id=\"cloned-item_" + clonedItemCounter + "_nw-control\"></div>")
           .css({
-            "left": (parseInt(stopPosition.left)) + "px",
-            "top": (parseInt(stopPosition.top)) + "px",
+            "left": parseInt(stopPosition.left) + "px",
+            "top": parseInt(stopPosition.top) + "px",
             "position": "absolute",
             "width": "50px",
             "height": "50px",
@@ -200,7 +200,7 @@ function initializePostcardItems() {
           $("<div id=\"cloned-item_" + clonedItemCounter + "_ne-control\"></div>")
           .css({
             "left": (parseInt(stopPosition.left) + parseInt($(clonedItemId).css("width")) - 50) + "px",
-            "top": (parseInt(stopPosition.top)) + "px",
+            "top": parseInt(stopPosition.top) + "px",
             "position": "absolute",
             "width": "50px",
             "height": "50px",
@@ -300,14 +300,14 @@ function initializePostcardItems() {
                   var resizePosition = ui.position;
 
                   $(clonedItemId + "_nw-control").css({
-                    "left": (parseInt(resizePosition.left)) + "px",
-                    "top": (parseInt(resizePosition.top)) + "px",
+                    "left": parseInt(resizePosition.left) + "px",
+                    "top": parseInt(resizePosition.top) + "px",
                   });
 
                   if (isLabel) {
                     $(clonedItemId + "_ne-control").css({
                       "left": (parseInt(resizePosition.left) + ui.size.width - 50) + "px",
-                      "top": (parseInt(resizePosition.top)) + "px",
+                      "top": parseInt(resizePosition.top) + "px",
                     });
                   }
                 }
@@ -329,14 +329,14 @@ function initializePostcardItems() {
                 revert: function (isValid) {
                   if (!isValid) {
                     $(clonedItemId + "_nw-control").css({
-                      "left": (parseInt(left)) + "px",
-                      "top": (parseInt(top)) + "px",
+                      "left": parseInt(left) + "px",
+                      "top": parseInt(top) + "px",
                     });
 
                     if (isLabel) {
                       $(clonedItemId + "_ne-control").css({
                         "left": (parseInt(left) + parseInt($(clonedItemId).css("width")) - 50) + "px",
-                        "top": (parseInt(top)) + "px",
+                        "top": parseInt(top) + "px",
                       });
                     }
                   }
@@ -348,14 +348,14 @@ function initializePostcardItems() {
                   var dragPosition = ui.offset;
 
                   $(clonedItemId + "_nw-control").css({
-                    "left": (parseInt(dragPosition.left)) + "px",
-                    "top": (parseInt(dragPosition.top)) + "px",
+                    "left": parseInt(dragPosition.left) + "px",
+                    "top": parseInt(dragPosition.top) + "px",
                   });
 
                   if (isLabel) {
                     $(clonedItemId + "_ne-control").css({
                       "left": (parseInt(dragPosition.left) + parseInt($(clonedItemId).css("width")) - 50) + "px",
-                      "top": (parseInt(dragPosition.top)) + "px",
+                      "top": parseInt(dragPosition.top) + "px",
                     });
                   }
                 }
@@ -391,14 +391,14 @@ function initializePostcard() {
 
           if (!isValid) {
             $("#" + droppedItem.attr("id") + "_nw-control").css({
-              "left": (parseInt(dropPosition.left)) + "px",
-              "top": (parseInt(dropPosition.top)) + "px",
+              "left": parseInt(dropPosition.left) + "px",
+              "top": parseInt(dropPosition.top) + "px",
             });
 
             if (droppedItem.hasClass("label_1st-type") || droppedItem.hasClass("label_2nd-type")) {
               $("#" + droppedItem.attr("id") + "_ne-control").css({
                 "left": (parseInt(dropPosition.left) + parseInt($("#" + droppedItem.attr("id")).css("width")) - 50) + "px",
-                "top": (parseInt(dropPosition.top)) + "px",
+                "top": parseInt(dropPosition.top) + "px",
               });
             }
           }
