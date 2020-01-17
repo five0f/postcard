@@ -143,7 +143,9 @@ body {
   font-size: 12px;
 }
 
-.send-postcard-form__input-field {
+.send-postcard-form__input-field,
+.input-text-form__input-field,
+.input-text-form__multiline-input-field {
   margin: 5px 0 0 0;
   display: block;
   width: 100%;
@@ -151,7 +153,9 @@ body {
   padding: 5px;
 }
 
-textarea.send-postcard-form__input-field {
+textarea.send-postcard-form__input-field,
+textarea.input-text-form__input-field,
+textarea.input-text-form__multiline-input-field {
   resize: none;
   height: 100px;
 }

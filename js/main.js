@@ -53,6 +53,68 @@ function initializeSendPostcardForm() {
   });
 }
 
+function initalizeInputTextForms() {
+  $(".input-text-form_1st-type").dialog({
+    autoOpen: false,
+    modal: true,
+    height: 170,
+    width: 350,
+    buttons: {
+      "Сохранить": function () {
+        if (!$("#text-input-field").val()) {
+          alert("Все поля ввода должны быть заполнены!");
+          return;
+        }
+
+        $(this).dialog("close");
+      },
+      "Отменить": function () {
+        $(this).dialog("close");
+      }
+    },
+    close: function () {
+      $("#text-input-field").val("");
+    },
+    title: "Ввести текст",
+    resizable: false,
+    position: {
+      my: "center",
+      at: "center",
+      of: document
+    }
+  });
+
+  $(".input-text-form_2nd-type").dialog({
+    autoOpen: false,
+    modal: true,
+    height: 248,
+    width: 350,
+    buttons: {
+      "Сохранить": function () {
+        if (!$("#multiline-text-input-field").val()) {
+          alert("Все поля ввода должны быть заполнены!");
+          return;
+        }
+
+        $(this).dialog("close");
+      },
+      "Отменить": function () {
+        $(this).dialog("close");
+      }
+    },
+    close: function () {
+      $("#multiline-text-input-field").val("");
+    },
+    title: "Ввести текст",
+    resizable: false,
+    position: {
+      my: "center",
+      at: "center",
+      of: document
+    }
+  });
+}
+
 var clonedItemCounter = 0;
 
 function initializePostcardItems() {
@@ -71,14 +133,15 @@ function initializePostcardItems() {
     },
     stop: function (_event, ui) {
       var clonedItemId = "#cloned-item_" + clonedItemCounter;
+      var isLabel = $(clonedItemId).hasClass("label_1st-type") || $(clonedItemId).hasClass("label_2nd-type");
 
       if ($(clonedItemId).hasClass("cloneable-item")) {
-        var position = ui.offset;
+        var stopPosition = ui.offset;
 
         $(clonedItemId)
           .css({
-            "left": position.left,
-            "top": position.top,
+            "left": stopPosition.left,
+            "top": stopPosition.top,
             "position": "absolute",
             "width": ui.helper.css("width"),
             "margin": ui.helper.css("margin")
@@ -92,28 +155,38 @@ function initializePostcardItems() {
             revert: function (isValid) {
               if (!isValid) {
                 $(clonedItemId + "_nw-control").css({
-                  "left": (parseInt(position.left) - 25) + "px",
-                  "top": (parseInt(position.top) - 25) + "px",
-                })
+                  "left": (parseInt(stopPosition.left)) + "px",
+                  "top": (parseInt(stopPosition.top)) + "px",
+                });
+
+                $(clonedItemId + "_ne-control").css({
+                  "left": (parseInt(stopPosition.left) + parseInt($(clonedItemId).css("width")) - 50) + "px",
+                  "top": (parseInt(stopPosition.top)) + "px",
+                });
               }
 
               return !isValid;
             },
             revertDuration: 0,
             drag: function (_event, ui) {
-              var _position = ui.offset;
+              var dragPosition = ui.offset;
 
               $(clonedItemId + "_nw-control").css({
-                "left": (parseInt(_position.left) - 25) + "px",
-                "top": (parseInt(_position.top) - 25) + "px",
-              })
+                "left": (parseInt(dragPosition.left)) + "px",
+                "top": (parseInt(dragPosition.top)) + "px",
+              });
+
+              $(clonedItemId + "_ne-control").css({
+                "left": (parseInt(dragPosition.left) + parseInt($(clonedItemId).css("width")) - 50) + "px",
+                "top": (parseInt(dragPosition.top)) + "px",
+              });
             }
           });
 
         $("<div id=\"cloned-item_" + clonedItemCounter + "_nw-control\"></div>")
           .css({
-            "left": (parseInt(position.left) - 25) + "px",
-            "top": (parseInt(position.top) - 25) + "px",
+            "left": (parseInt(stopPosition.left)) + "px",
+            "top": (parseInt(stopPosition.top)) + "px",
             "position": "absolute",
             "width": "50px",
             "height": "50px",
@@ -123,25 +196,94 @@ function initializePostcardItems() {
           })
           .insertAfter(clonedItemId);
 
+        if (isLabel) {
+          $("<div id=\"cloned-item_" + clonedItemCounter + "_ne-control\"></div>")
+          .css({
+            "left": (parseInt(stopPosition.left) + parseInt($(clonedItemId).css("width")) - 50) + "px",
+            "top": (parseInt(stopPosition.top)) + "px",
+            "position": "absolute",
+            "width": "50px",
+            "height": "50px",
+            "background": "url(\"./images/text.svg\") center no-repeat, lightgray",
+            "display": "none",
+            "z-index": "99999"
+          })
+          .insertAfter(clonedItemId + "_nw-control");
+        }
+
         $(clonedItemId).hover(function () {
           $(clonedItemId + "_nw-control").css({
             "display": "block"
           });
+
+          if (isLabel) {
+            $(clonedItemId + "_ne-control").css({
+              "display": "block"
+            });
+          }
         }, function () {
           $(clonedItemId + "_nw-control").css({
             "display": "none"
           });
+
+          if (isLabel) {
+            $(clonedItemId + "_ne-control").css({
+              "display": "none"
+            });
+          }
         });
+
+        if (isLabel) {
+          $(clonedItemId + "_ne-control")
+          .hover(function () {
+            $(clonedItemId + "_nw-control").css({
+              "display": "block"
+            });
+
+            $(this).css({
+              "display": "block"
+            });
+          }, function () {
+            $(clonedItemId + "_nw-control").css({
+              "display": "none"
+            });
+
+            $(this).css({
+              "display": "none"
+            });
+          })
+          .click(function () {
+            if ($(clonedItemId).hasClass("label_1st-type")) {
+              $(".input-text-form_1st-type").dialog("open");
+            } else if ($(clonedItemId).hasClass("label_2nd-type")) {
+              $(".input-text-form_2nd-type").dialog("open");
+            } else {
+              // ignore...
+            }
+          });
+        }
 
         $(clonedItemId + "_nw-control")
           .hover(function () {
             $(this).css({
-              "display": "block",
+              "display": "block"
             });
+
+            if (isLabel) {
+              $(clonedItemId + "_ne-control").css({
+                "display": "block"
+              });
+            }
           }, function () {
             $(this).css({
               "display": "none"
             });
+
+            if (isLabel) {
+              $(clonedItemId + "_ne-control").css({
+                "display": "none"
+              });
+            }
           })
           .click(function () {
             if ($(clonedItemId).hasClass("ui-draggable")) {
@@ -153,7 +295,22 @@ function initializePostcardItems() {
                 aspectRatio: true,
                 autoHide: true,
                 containment: "parent",
-                handles: "n, e, s, w, ne, se, sw"
+                handles: "n, e, s, w, se, sw",
+                resize: function (_event, ui) {
+                  var resizePosition = ui.position;
+
+                  $(clonedItemId + "_nw-control").css({
+                    "left": (parseInt(resizePosition.left)) + "px",
+                    "top": (parseInt(resizePosition.top)) + "px",
+                  });
+
+                  if (isLabel) {
+                    $(clonedItemId + "_ne-control").css({
+                      "left": (parseInt(resizePosition.left) + ui.size.width - 50) + "px",
+                      "top": (parseInt(resizePosition.top)) + "px",
+                    });
+                  }
+                }
               });
 
               $(clonedItemId + "_nw-control").css({
@@ -172,21 +329,35 @@ function initializePostcardItems() {
                 revert: function (isValid) {
                   if (!isValid) {
                     $(clonedItemId + "_nw-control").css({
-                      "left": (parseInt(left) - 25) + "px",
-                      "top": (parseInt(top) - 25) + "px",
-                    })
+                      "left": (parseInt(left)) + "px",
+                      "top": (parseInt(top)) + "px",
+                    });
+
+                    if (isLabel) {
+                      $(clonedItemId + "_ne-control").css({
+                        "left": (parseInt(left) + parseInt($(clonedItemId).css("width")) - 50) + "px",
+                        "top": (parseInt(top)) + "px",
+                      });
+                    }
                   }
 
                   return !isValid;
                 },
                 revertDuration: 0,
                 drag: function (_event, ui) {
-                  var __position = ui.offset;
+                  var dragPosition = ui.offset;
 
                   $(clonedItemId + "_nw-control").css({
-                    "left": (parseInt(__position.left) - 25) + "px",
-                    "top": (parseInt(__position.top) - 25) + "px",
-                  })
+                    "left": (parseInt(dragPosition.left)) + "px",
+                    "top": (parseInt(dragPosition.top)) + "px",
+                  });
+
+                  if (isLabel) {
+                    $(clonedItemId + "_ne-control").css({
+                      "left": (parseInt(dragPosition.left) + parseInt($(clonedItemId).css("width")) - 50) + "px",
+                      "top": (parseInt(dragPosition.top)) + "px",
+                    });
+                  }
                 }
               });
 
@@ -214,6 +385,26 @@ function initializePostcard() {
         $(this).append(clonedItem);
         $(".temporary-class").attr("id", "cloned-item_" + clonedItemCounter);
         $("#cloned-item_" + clonedItemCounter).removeClass("temporary-class");
+      } else {
+        droppedItem.draggable("option", "revert", function (isValid) {
+          var dropPosition = ui.offset;
+
+          if (!isValid) {
+            $("#" + droppedItem.attr("id") + "_nw-control").css({
+              "left": (parseInt(dropPosition.left)) + "px",
+              "top": (parseInt(dropPosition.top)) + "px",
+            });
+
+            if (droppedItem.hasClass("label_1st-type") || droppedItem.hasClass("label_2nd-type")) {
+              $("#" + droppedItem.attr("id") + "_ne-control").css({
+                "left": (parseInt(dropPosition.left) + parseInt($("#" + droppedItem.attr("id")).css("width")) - 50) + "px",
+                "top": (parseInt(dropPosition.top)) + "px",
+              });
+            }
+          }
+
+          return !isValid;
+        });
       }
     }
   });
@@ -225,6 +416,7 @@ function initalizeTrash() {
     accept: ".cloned-item",
     drop: function (_event, ui) {
       $("#" + ui.draggable.attr("id") + "_nw-control").remove();
+      $("#" + ui.draggable.attr("id") + "_ne-control").remove();
       ui.draggable.remove();
     }
   });
@@ -234,6 +426,7 @@ $(document).ready(function () {
   initializeSidebarButton();
   initializeColorPicker();
   initializeSendPostcardForm();
+  initalizeInputTextForms();
   initializePostcard();
   initalizeTrash();
   initializePostcardItems();
