@@ -159,10 +159,12 @@ function initializePostcardItems() {
                   "top": parseInt(stopPosition.top) + "px",
                 });
 
-                $(clonedItemId + "_ne-control").css({
-                  "left": (parseInt(stopPosition.left) + parseInt($(clonedItemId).css("width")) - 50) + "px",
-                  "top": parseInt(stopPosition.top) + "px",
-                });
+                if (isLabel) {
+                  $(clonedItemId + "_ne-control").css({
+                    "left": (parseInt(stopPosition.left) + parseInt($(clonedItemId).css("width")) - 50) + "px",
+                    "top": parseInt(stopPosition.top) + "px",
+                  });
+                }
               }
 
               return !isValid;
@@ -176,10 +178,12 @@ function initializePostcardItems() {
                 "top": parseInt(dragPosition.top) + "px",
               });
 
-              $(clonedItemId + "_ne-control").css({
-                "left": (parseInt(dragPosition.left) + parseInt($(clonedItemId).css("width")) - 50) + "px",
-                "top": parseInt(dragPosition.top) + "px",
-              });
+              if (isLabel) {
+                $(clonedItemId + "_ne-control").css({
+                  "left": (parseInt(dragPosition.left) + parseInt($(clonedItemId).css("width")) - 50) + "px",
+                  "top": parseInt(dragPosition.top) + "px",
+                });
+              }
             }
           });
 
@@ -416,7 +420,11 @@ function initalizeTrash() {
     accept: ".cloned-item",
     drop: function (_event, ui) {
       $("#" + ui.draggable.attr("id") + "_nw-control").remove();
-      $("#" + ui.draggable.attr("id") + "_ne-control").remove();
+
+      if (ui.draggable.hasClass("label_1st-type") || ui.draggable.hasClass("label_2nd-type")) {
+        $("#" + ui.draggable.attr("id") + "_ne-control").remove();
+      }
+
       ui.draggable.remove();
     }
   });
