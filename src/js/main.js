@@ -299,7 +299,6 @@ function initializePostcardItems() {
                 minWidth: 100,
                 minHeight: 100,
                 aspectRatio: true,
-                autoHide: true,
                 containment: "parent",
                 handles: "n, e, s, w, se, sw",
                 resize: function (_event, ui) {
