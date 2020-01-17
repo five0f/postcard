@@ -87,10 +87,14 @@ body {
   overflow-x: auto;
 }
 
-.app-name {
+.main__app-name {
   margin-bottom: 0;
   text-align: center;
-  width: 690px;
+}
+
+.main__instructions {
+  margin-top: 15px;
+  text-align: center;
 }
 
 .wrapper {
@@ -99,7 +103,7 @@ body {
   display: block;
   margin: 30px 50px 0;
   width: 884px;
-  height: 714px;
+  height: 704px;
 }
 
 .area-to-capture {
@@ -156,4 +160,20 @@ textarea.send-postcard-form__input-field {
   height: 35px;
   margin-right: 150px;
   background: url("../images/trash.svg") center no-repeat, rgb(231, 229, 229);
+}
+
+.sp-replacer.sp-light {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sp-preview {
+  flex-grow: 1;
+  flex-shrink: 0;
+}
+
+.sp-dd {
+  flex-grow: 0;
+  flex-shrink: 0;
 }

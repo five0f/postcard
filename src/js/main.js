@@ -1,9 +1,9 @@
 "use strict";
 
 function initializeSidebarButton() {
-  $(".sidebar-button").on("click", function () {
+  $(".sidebar-button").click(function () {
     $(".sidebar").toggleClass("sidebar_opened");
-    $(".sidebar-button").toggleClass("sidebar-button_opened");
+    $(this).toggleClass("sidebar-button_opened");
   });
 }
 
@@ -62,6 +62,7 @@ function initializePostcardItems() {
     cursor: "move",
     stack: ".cloneable-item, .cloned-item",
     revert: "invalid",
+    revertDuration: 0,
     start: function (_event, ui) {
       ui.helper.css({
         "width": "",
@@ -74,47 +75,126 @@ function initializePostcardItems() {
       if ($(clonedItemId).hasClass("cloneable-item")) {
         var position = ui.offset;
 
-        $(clonedItemId).css({
-          "left": position.left,
-          "top": position.top,
-          "position": "absolute",
-          "width": ui.helper.css("width"),
-          "margin": ui.helper.css("margin")
+        $(clonedItemId)
+          .css({
+            "left": position.left,
+            "top": position.top,
+            "position": "absolute",
+            "width": ui.helper.css("width"),
+            "margin": ui.helper.css("margin")
+          })
+          .removeClass("cloneable-item")
+          .addClass("cloned-item")
+          .draggable({
+            stack: ".cloned-item",
+            cursor: "move",
+            scroll: false,
+            revert: function (isValid) {
+              if (!isValid) {
+                $(clonedItemId + "_nw-control").css({
+                  "left": (parseInt(position.left) - 25) + "px",
+                  "top": (parseInt(position.top) - 25) + "px",
+                })
+              }
+
+              return !isValid;
+            },
+            revertDuration: 0,
+            drag: function (_event, ui) {
+              var _position = ui.offset;
+
+              $(clonedItemId + "_nw-control").css({
+                "left": (parseInt(_position.left) - 25) + "px",
+                "top": (parseInt(_position.top) - 25) + "px",
+              })
+            }
+          });
+
+        $("<div id=\"cloned-item_" + clonedItemCounter + "_nw-control\"></div>")
+          .css({
+            "left": (parseInt(position.left) - 25) + "px",
+            "top": (parseInt(position.top) - 25) + "px",
+            "position": "absolute",
+            "width": "50px",
+            "height": "50px",
+            "background": "url(\"./images/move.svg\") center no-repeat, lightgray",
+            "display": "none",
+            "z-index": "99999"
+          })
+          .insertAfter(clonedItemId);
+
+        $(clonedItemId).hover(function () {
+          $(clonedItemId + "_nw-control").css({
+            "display": "block"
+          });
+        }, function () {
+          $(clonedItemId + "_nw-control").css({
+            "display": "none"
+          });
         });
 
-        $(clonedItemId).removeClass("cloneable-item");
-        $(clonedItemId).addClass("cloned-item");
-
-        $(clonedItemId).draggable({
-          stack: ".cloned-item",
-          cursor: "move",
-          scroll: false,
-          revert: "invalid"
-        });
-
-        $(clonedItemId).dblclick(function () {
-          if ($(this).hasClass("ui-draggable")) {
-            $(this).draggable("destroy");
-
-            $(this).resizable({
-              aspectRatio: true,
-              autoHide: true,
-              containment: "parent",
-              handles: "all"
+        $(clonedItemId + "_nw-control")
+          .hover(function () {
+            $(this).css({
+              "display": "block",
             });
-          } else if ($(this).hasClass("ui-resizable")) {
-            $(this).resizable("destroy");
-
-            $(this).draggable({
-              stack: ".cloned-item",
-              cursor: "move",
-              scroll: false,
-              revert: "invalid"
+          }, function () {
+            $(this).css({
+              "display": "none"
             });
-          } else {
-            // ignore...
-          }
-        });
+          })
+          .click(function () {
+            if ($(clonedItemId).hasClass("ui-draggable")) {
+              $(clonedItemId).draggable("destroy");
+
+              $(clonedItemId).resizable({
+                aspectRatio: true,
+                autoHide: true,
+                containment: "parent",
+                handles: "n, e, s, w, ne, se, sw"
+              });
+
+              $(clonedItemId + "_nw-control").css({
+                "background-image": "url(\"./images/resize.svg\")"
+              });
+            } else if ($(clonedItemId).hasClass("ui-resizable")) {
+              $(clonedItemId).resizable("destroy");
+
+              var left = $(clonedItemId).css("left");
+              var top = $(clonedItemId).css("top");
+
+              $(clonedItemId).draggable({
+                stack: ".cloned-item",
+                cursor: "move",
+                scroll: false,
+                revert: function (isValid) {
+                  if (!isValid) {
+                    $(clonedItemId + "_nw-control").css({
+                      "left": (parseInt(left) - 25) + "px",
+                      "top": (parseInt(top) - 25) + "px",
+                    })
+                  }
+
+                  return !isValid;
+                },
+                revertDuration: 0,
+                drag: function (_event, ui) {
+                  var __position = ui.offset;
+
+                  $(clonedItemId + "_nw-control").css({
+                    "left": (parseInt(__position.left) - 25) + "px",
+                    "top": (parseInt(__position.top) - 25) + "px",
+                  })
+                }
+              });
+
+              $(clonedItemId + "_nw-control").css({
+                "background-image": "url(\"./images/move.svg\")"
+              });
+            } else {
+              // ignore...
+            }
+          });
       }
     }
   });
@@ -142,6 +222,7 @@ function initalizeTrash() {
     tolerance: "touch",
     accept: ".cloned-item",
     drop: function (_event, ui) {
+      $("#" + ui.draggable.attr("id") + "_nw-control").remove();
       ui.draggable.remove();
     }
   });
