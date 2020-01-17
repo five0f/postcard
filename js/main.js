@@ -148,6 +148,8 @@ function initializePostcardItems() {
               $(clonedItemId).draggable("destroy");
 
               $(clonedItemId).resizable({
+                minWidth: 100,
+                minHeight: 100,
                 aspectRatio: true,
                 autoHide: true,
                 containment: "parent",
