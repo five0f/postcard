@@ -1,7 +1,14 @@
 "use strict";
 
 function getPostcardCanvas() {
-  return html2canvas(document.querySelector("#postcard"));
+  return html2canvas(document.querySelector("#postcard"), {
+    ignoreElements: function (element) {
+      return (
+        element.className.search(/ui-resizable-handle/) != -1 ||
+        element.id.search(/cloned-item_[0-9]{1,}_n[we]-control/) != -1
+      );
+    }
+  });
 }
 
 function downloadPostcardImage() {
