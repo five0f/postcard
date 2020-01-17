@@ -13,7 +13,8 @@
 	"scripts": {
 		"start": "gulp",
 		"build": "gulp build",
-		"deploy": "gh-pages -d ./build"
+		"deploy": "gh-pages -d ./build",
+		"buildAndDeploy": "npm run build; npm run deploy"
 	},
 	"devDependencies": {
 		"browser-sync": "2.26.7",
