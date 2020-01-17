@@ -194,7 +194,8 @@ function initializePostcardItems() {
             "position": "absolute",
             "width": "50px",
             "height": "50px",
-            "background": "url(\"./images/move.svg\") center no-repeat, lightgray",
+            "background": "url(\"./images/move.svg\") center no-repeat",
+            "background-color": "lightgray",
             "display": "none",
             "z-index": "99999"
           })
@@ -208,7 +209,8 @@ function initializePostcardItems() {
             "position": "absolute",
             "width": "50px",
             "height": "50px",
-            "background": "url(\"./images/text.svg\") center no-repeat, lightgray",
+            "background": "url(\"./images/text.svg\") center no-repeat",
+            "background-color": "lightgray",
             "display": "none",
             "z-index": "99999"
           })
