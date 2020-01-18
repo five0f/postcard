@@ -117,7 +117,7 @@ function initializePostcardItems() {
             "position": "absolute",
             "width": "50px",
             "height": "50px",
-            "background": "url(\"./images/ui/move.svg\") center no-repeat",
+            "background": "url(./images/ui/move.svg) center no-repeat",
             "background-color": "lightgray",
             "display": "none",
             "z-index": "99999"
@@ -165,7 +165,7 @@ function initializePostcardItems() {
               });
 
               $(clonedItemId + "_control").css({
-                "background-image": "url(\"./images/ui/resize.svg\")"
+                "background-image": "url(./images/ui/resize.svg)"
               });
             } else if ($(clonedItemId).hasClass("ui-resizable")) {
               $(clonedItemId).resizable("destroy");
@@ -199,7 +199,7 @@ function initializePostcardItems() {
               });
 
               $(clonedItemId + "_control").css({
-                "background-image": "url(\"./images/ui/move.svg\")"
+                "background-image": "url(./images/ui/move.svg)"
               });
             } else {
               // do nothing

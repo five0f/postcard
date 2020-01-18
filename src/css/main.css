@@ -1,3 +1,17 @@
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Roboto"), local("Roboto-Regular"), url(../fonts/Roboto-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  src: local("Roboto Bold"), local("Roboto-Bold"), url(../fonts/Roboto-Bold.ttf) format('truetype');
+}
+
 * {
   font-family: "Roboto", sans-serif;
   box-sizing: border-box;
@@ -66,14 +80,14 @@ body {
   border: 0;
   height: 100%;
   width: 30px;
-  background: url("../images/ui/right-arrow.svg") center no-repeat;
+  background: url(../images/ui/right-arrow.svg) center no-repeat;
   background-color: #50d090;
   flex-grow: 1;
   flex-shrink: 0;
 }
 
 .sidebar-button_opened {
-  background-image: url("../images/ui/left-arrow.svg");
+  background-image: url(../images/ui/left-arrow.svg);
 }
 
 .main {
@@ -160,7 +174,7 @@ textarea.send-postcard-form__input-field {
   width: 50px;
   height: 35px;
   margin-right: 150px;
-  background: url("../images/ui/trash.svg") center no-repeat;
+  background: url(../images/ui/trash.svg) center no-repeat;
   background-color: rgb(231, 229, 229);
 }
 
