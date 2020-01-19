@@ -92,8 +92,8 @@ function initializePostcardItems() {
             revert: function (isValid) {
               if (!isValid) {
                 $(clonedItemId + "_control").css({
-                  "left": parseInt(stopPosition.left) + "px",
-                  "top": parseInt(stopPosition.top) + "px",
+                  "left": stopPosition.left,
+                  "top": stopPosition.top,
                 });
               }
 
@@ -104,16 +104,16 @@ function initializePostcardItems() {
               var dragPosition = ui.offset;
 
               $(clonedItemId + "_control").css({
-                "left": parseInt(dragPosition.left) + "px",
-                "top": parseInt(dragPosition.top) + "px",
+                "left": dragPosition.left,
+                "top": dragPosition.top
               });
             }
           });
 
         $("<div id=\"cloned-item_" + clonedItemCounter + "_control\"></div>")
           .css({
-            "left": parseInt(stopPosition.left) + "px",
-            "top": parseInt(stopPosition.top) + "px",
+            "left": stopPosition.left,
+            "top": stopPosition.top,
             "position": "absolute",
             "width": "50px",
             "height": "50px",
@@ -158,8 +158,8 @@ function initializePostcardItems() {
                   var resizePosition = ui.position;
 
                   $(clonedItemId + "_control").css({
-                    "left": parseInt(resizePosition.left) + "px",
-                    "top": parseInt(resizePosition.top) + "px",
+                    "left": resizePosition.left,
+                    "top": resizePosition.top
                   });
                 }
               });
@@ -180,8 +180,8 @@ function initializePostcardItems() {
                 revert: function (isValid) {
                   if (!isValid) {
                     $(clonedItemId + "_control").css({
-                      "left": parseInt(left) + "px",
-                      "top": parseInt(top) + "px",
+                      "left": left,
+                      "top": top,
                     });
                   }
 
@@ -192,8 +192,8 @@ function initializePostcardItems() {
                   var dragPosition = ui.offset;
 
                   $(clonedItemId + "_control").css({
-                    "left": parseInt(dragPosition.left) + "px",
-                    "top": parseInt(dragPosition.top) + "px",
+                    "left": dragPosition.left,
+                    "top": dragPosition.top,
                   });
                 }
               });
@@ -228,8 +228,8 @@ function initializePostcard() {
             var dropPosition = ui.offset;
 
             $("#" + droppedItem.attr("id") + "_control").css({
-              "left": parseInt(dropPosition.left) + "px",
-              "top": parseInt(dropPosition.top) + "px",
+              "left": dropPosition.left,
+              "top": dropPosition.top
             });
           }
 
@@ -240,7 +240,7 @@ function initializePostcard() {
   });
 }
 
-function initalizeTrash() {
+function initializeTrash() {
   $("#trash").droppable({
     tolerance: "touch",
     accept: ".cloned-item",
@@ -256,7 +256,7 @@ $(document).ready(function () {
   initializeColorPicker();
   initializeSendPostcardForm();
   initializePostcard();
-  initalizeTrash();
+  initializeTrash();
   initializePostcardItems();
 });
 
